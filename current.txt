@@ -1,0 +1,40 @@
+ 
+public class  Test{
+	static Stack<Character> n = new Stack();
+	
+	static boolean parentheses(String str) {
+		HashMap<Character,Character> p = new HashMap();
+		p.put('(', ')');
+		p.put('[', ']');
+		p.put('{', '}');
+		
+		for(int i=0;i<=str.length()-1;i++) {
+			if('('==str.charAt(i)||'['==str.charAt(i)||'{'==str.charAt(i)) {
+				n.push(str.charAt(i));
+			}else {
+				if(n.isEmpty()) {
+					return false;
+				}
+				char store=p.get(n.peek()); 
+				if(store!=str.charAt(i)) {
+					return false;
+				}			
+				n.pop();
+			}
+		}
+		if(!n.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+		public static void main(String[] args) {
+		String parenthesis="{{[]()}}}}";
+		if(parentheses(parenthesis)) {
+			System.out.println("balanced");
+		}
+		else {
+			System.out.println("unbalanced");
+			}
+	}
+}
